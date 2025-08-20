@@ -1,43 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/fundamentals.dart';
+import 'package:flutter_application_1/login.dart';
+import 'package:flutter_application_1/signup.dart';
 
 void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: {'/': (context) => ButtonExample()},
+      routes: {
+        '/': (context) => Home(),
+        '/login': (context) => Login(),
+        '/signup': (context) => Signup(),
+      },
     ),
   );
 }
 
-class ButtonExample extends StatelessWidget {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Buttons Example")),
+      appBar: AppBar(
+        title: const Text(
+          'Home Screen',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+      ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () => print("Elevated Button Clicked"),
-              child: Text("ElevatedButton"),
-            ),
-            TextButton(
-              onPressed: () => print("Text Button Clicked"),
-              child: Text("TextButton"),
+            Container(
+              padding: EdgeInsets.all(20),
+              margin: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: const Text(
+                'This is the Hompage',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
             ),
             IconButton(
-              icon: Icon(Icons.thumb_up),
-              onPressed: () => print("Icon Button Clicked"),
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => print("FloatingActionButton Clicked"),
-        child: Icon(Icons.add),
       ),
     );
   }
