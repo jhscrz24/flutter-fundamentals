@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
                         if (value == null || value.isEmpty) {
                           return "Email is required";
                         }
-                        if (!value.contains("@")) {
+                        if (!value.contains("@") || !value.contains(".")) {
                           return "Enter a valid email";
                         }
                         return null;

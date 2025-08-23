@@ -12,6 +12,8 @@ void main() {
 }
 
 class FormExample extends StatefulWidget {
+  const FormExample({super.key});
+
   @override
   _FormExampleState createState() => _FormExampleState();
 }

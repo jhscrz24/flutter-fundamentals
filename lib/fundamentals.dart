@@ -145,6 +145,119 @@ class Layouts extends StatelessWidget {
   }
 }
 
+// LISTVIEW
+class ListViewExample extends StatelessWidget {
+  final List<String> items = List.generate(20, (index) => "Item ${index + 1}");
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("ListView Example")),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: Icon(Icons.label),
+            title: Text(items[index]),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// GESTUREDETECTOR
+
+class GestureExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("GestureDetector Example")),
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text("Box Tapped!")));
+          },
+          child: Container(
+            width: 150,
+            height: 150,
+            color: Colors.blue,
+            child: Center(
+              child: Text(
+                "Tap Me",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// GRID VIEW
+class GridViewExample extends StatelessWidget {
+  final List<String> items = List.generate(12, (index) => "Item ${index + 1}");
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("GridView Example")),
+      body: GridView.count(
+        crossAxisCount: 3, // number of columns
+        children: items
+            .map(
+              (item) => Card(
+                color: Colors.blue.shade100,
+                child: Center(child: Text(item)),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+}
+
+// DRAWER
+class DrawerExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Drawer Example")),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text(
+                "Menu",
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: () {
+                Navigator.pop(context); // close drawer
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("Settings"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+      body: Center(child: Text("Swipe from left or tap menu icon")),
+    );
+  }
+}
+
 // ICON EXAMPLE
 class ForIcon extends StatelessWidget {
   const ForIcon({super.key});
@@ -181,6 +294,43 @@ class Contain extends StatelessWidget {
       child: const Text(
         'Hello Worlds',
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+// BOTTOM NAVIGATION BAR
+class BottomNavExample extends StatefulWidget {
+  @override
+  _BottomNavExampleState createState() => _BottomNavExampleState();
+}
+
+class _BottomNavExampleState extends State<BottomNavExample> {
+  int _selectedIndex = 0;
+
+  final List<Widget> pages = [
+    Center(child: Text("Home Page")),
+    Center(child: Text("Search Page")),
+    Center(child: Text("Profile Page")),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("BottomNavigationBar Example")),
+      body: pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        ],
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
       ),
     );
   }
